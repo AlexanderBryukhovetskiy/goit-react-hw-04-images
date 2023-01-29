@@ -1,22 +1,17 @@
-import React, { Component } from "react";
 import PropTypes from "prop-types";
 import css from "./ImageGallery.module.css";
 import ImageGalleryItem from "components/ImageGalleryItem";
 
 
-class ImageGallery extends Component {
+const ImageGallery = ({ imageList }) => {
 
-    render() {
-      const { imageList } = this.props;
-
-      return (
-        <ul className={css.ImageGallery }>
-          {imageList.map( imageListItem => (
-            <ImageGalleryItem data={imageListItem} key={imageListItem.id}/>))
-          }
-        </ul>
-      )
-    }
+  return (
+    <ul className={css.ImageGallery }>
+      {imageList.map( imageListItem => (
+        <ImageGalleryItem data={imageListItem} key={imageListItem.id}/>))
+      }
+    </ul>
+  )
 };
 
 ImageGallery.propTypes = {
@@ -29,3 +24,5 @@ ImageGallery.propTypes = {
 };
 
 export default ImageGallery;
+
+//переписано на хуки

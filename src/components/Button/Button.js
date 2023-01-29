@@ -19,3 +19,5 @@ Button.propTypes = {
 };
 
 export default Button;
+
+ //нечего переписывать

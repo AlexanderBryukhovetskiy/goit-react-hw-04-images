@@ -18,3 +18,5 @@ import { Circles } from 'react-loader-spinner'
   };
 
   export default Loader;
+
+  //нечего переписывать
