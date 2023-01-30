@@ -16,78 +16,68 @@ const App = () => {
   const [totalImages, setTotalImages] = useState(0);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [isFirstRender, setIsFirstRender] = useState(true);
+
 
   useEffect(()=> {
-
-    if (isFirstRender){
-      setIsFirstRender(false);
-      return;
-    };
-
-    console.log('Search name changed');
     
     if (!searchName){
       return
     };
 
-    try{
-      setLoading(true);
+    const searchImages = async () => {
+      try {
+        setLoading(true);
 
-      const response = fetchPictures(searchName, page);
-          console.log('response :', response);
+        const response = await fetchPictures(searchName, page);
+            console.log('response :', response);
+            
+        setTotalImages(response.data.totalHits);
+            console.log('totalImages :', totalImages);
 
-      // async function getResponse (searchName, page) {
-      //   await fetchPictures(searchName, page)};
+        if ( totalImages === 0 ) {
+          return toast(`There are no pictures by word ${searchName}`);
+        }
 
-      // const response = getResponse();
-      //     console.log('response :', response);
-
-      setTotalImages(response.data.totalHits);
-          console.log('totalImages :', totalImages);
-
-      if ( totalImages === 0 ) {
-        return toast(`There are no pictures by word ${searchName}`);
+        if ( totalImages > 0 ) {
+          setImageList(response.data.hits);
+          //setTotalImages(response.data.totalHits);
+        } 
+        else {
+          return Promise.reject(new Error(`There are no pictures by word ${searchName}`));
+        }
       }
-
-      if ( totalImages > 0 ) {
-        setImageList(response.data.hits);
-        //setTotalImages(response.data.totalHits);
-      } 
-      else {
-        return Promise.reject(new Error(`There are no pictures by word ${searchName}`));
+      catch(error) { 
+        setError(error);
       }
+      finally { setLoading(false) };
     }
-    catch(error) { 
-      setError(error);
-    }
-    finally { setLoading(false) };
-  }, [searchName]);
+    searchImages();
+  }, [searchName, page]);
 
 
-  useEffect(()=> {
-    if (isFirstRender){
-      setIsFirstRender(false);
-      return;
-    };
+  // useEffect(()=> {
+  //   if (isFirstRender){
+  //     setIsFirstRender(false);
+  //     return;
+  //   };
 
-    console.log('Page number changed');
+  //   console.log('Page number changed');
     
-    try{
-      setLoading(true);
+  //   try{
+  //     setLoading(true);
 
-      const response = fetchPictures(searchName, page);
-      const nextPageImages = response.data.hits;
+  //     const response = fetchPictures(searchName, page);
+  //     const nextPageImages = response.data.hits;
 
-      setImageList([...imageList, ...nextPageImages]);
+  //     setImageList([...imageList, ...nextPageImages]);
 
-      console.log(`imageList of ${page} pages :`, imageList);
-    } 
-    catch(error) { 
-      setError(error);
-    }
-    finally { setLoading(false) };
-  }, [page]);
+  //     console.log(`imageList of ${page} pages :`, imageList);
+  //   } 
+  //   catch(error) { 
+  //     setError(error);
+  //   }
+  //   finally { setLoading(false) };
+  // }, [page]);
 
 
   const handleSearchSubmit = searchName => {
@@ -143,14 +133,14 @@ export default App;
 //     loading: false,
 //   };
 
-//   async componentDidUpdate(_, prevState) {
+  // async componentDidUpdate(_, prevState) {
 
-//     const { searchName, page } = this.state;
+  //   const { searchName, page } = this.state;
 
-//     if (prevState.searchName !== searchName || prevState.page !== page) {
-//       console.log('Search name or page number changed');
+  //   if (prevState.searchName !== searchName || prevState.page !== page) {
+  //     console.log('Search name or page number changed');
   
-//       try{
+  //     try{
   //       this.setState( { loading: true } );
 
   //       const response = await fetchPictures(searchName, page);
