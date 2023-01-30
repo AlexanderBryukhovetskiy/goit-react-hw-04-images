@@ -34,12 +34,12 @@ const App = () => {
         setTotalImages(response.data.totalHits);
             console.log('totalImages :', totalImages);
 
-        if ( totalImages === 0 ) {
+        if ( response.data.totalHits === 0 ) {
           return toast(`There are no pictures by word ${searchName}`);
         }
 
-        if ( totalImages > 0 ) {
-          setImageList(response.data.hits);
+        if (response.data.totalHits > 0 ) {
+          setImageList((prevList) => [... prevList, ...response.data.hits]);
           //setTotalImages(response.data.totalHits);
         } 
         else {
