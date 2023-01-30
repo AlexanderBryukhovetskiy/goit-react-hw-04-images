@@ -6,5 +6,6 @@
 }
 
 .serviceMessage {
-  margin: 0 auto;
+  margin: 10px auto;
+  font-size: 18px;
 }

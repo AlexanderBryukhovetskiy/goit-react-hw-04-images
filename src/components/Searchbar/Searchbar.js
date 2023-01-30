@@ -1,9 +1,9 @@
 import {useState} from "react";
 import PropTypes from "prop-types";
-import css from "./Searchbar.module.css";
+import css from "./SearchBar.module.css";
 import { toast } from 'react-toastify';
 
-const Searchbar = ({onSubmit}) => {
+const SearchBar = ({onSubmit}) => {
   const [searchName, setSearchName] = useState('');
 
   const handleChange = event => {
@@ -46,10 +46,10 @@ const Searchbar = ({onSubmit}) => {
   ) 
 }
 
-Searchbar.propTypes = {
+SearchBar.propTypes = {
   onSubmit: PropTypes.func.isRequired
 };
 
-export default Searchbar;
+export default SearchBar;
 
 //переписано на хуки
