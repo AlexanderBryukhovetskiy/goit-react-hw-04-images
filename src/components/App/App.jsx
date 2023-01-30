@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import css from "./App.module.css";
-import SearchBar from "../SearchBar";
+import Searchbar from "../Searchbar";
 import ImageGallery from "components/ImageGallery";
 import fetchPictures from '../functions';
 import Button from "components/Button";
@@ -102,7 +102,7 @@ const App = () => {
 
   return (  
     <>
-      <SearchBar onSubmit={handleSearchSubmit}/>
+      <Searchbar onSubmit={handleSearchSubmit}/>
 
       <div className={css.App}>
         { error && (<h1 className={css.serviceMessage}> There are no images by search name "{searchName}". Please try input another word</h1>) }
