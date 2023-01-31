@@ -2,7 +2,6 @@ import PropTypes from "prop-types";
 import css from "./ImageGallery.module.css";
 import ImageGalleryItem from "components/ImageGalleryItem";
 
-
 const ImageGallery = ({ imageList }) => {
 
   return (

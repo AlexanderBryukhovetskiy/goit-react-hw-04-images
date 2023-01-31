@@ -17,15 +17,12 @@ const Modal = ({ onClose, children }) => {
 
   const handleKeyDown = (event) => {
     if (event.code === 'Escape') {
-      console.log('escape pressed'); 
       onClose();
     }
   }
 
   const handleOverlayClick = (event) => {
-    console.log('event.target: ', event.target);
-    console.log('event.currentTarget :', event.currentTarget);
-    if (event.target === event.currentTarget) {
+      if (event.target === event.currentTarget) {
       onClose();
     }
   }

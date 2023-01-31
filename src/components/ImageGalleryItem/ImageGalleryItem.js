@@ -1,54 +1,33 @@
-import React, {Component} from "react";
+import { useState } from "react";
 import PropTypes from "prop-types";
 import css from "./ImageGalleryItem.module.css";
 import Modal from "components/Modal";
 
-class ImageGalleryItem extends Component {
-  state = {
-    showModal: false,
-    largeImageURL: null,
-  }
 
-  toggleModal = () => { 
-    const  { showModal, largeImageURL } = this.state;
-
-    this.setState(  { showModal: !showModal } );
-
+const ImageGalleryItem = ({ data }) => {
+  const [showModal, setShowModal] = useState(false);
+  const [largeImageURL, setLargeImageURL] = useState(null);
+  
+  const toggleModal = () => { 
+    setShowModal( showModal => !showModal );
     if (largeImageURL !== null) {
-      this.setState( { largeImageURL } );
+      setLargeImageURL( largeImageURL );
     } 
     else {  
-      this.setState( { largeImageURL: null } ); 
+      setLargeImageURL(null); 
     };
   };
 
-  render () {
-    const  { showModal } = this.state;
-    const { data } = this.props;
-
-    return (
-        <li id={data.id} className={css.ImageGalleryItem} >
-          <img onClick={this.toggleModal} src={data.webformatURL} alt="" 
-            className={css.ImageGalleryItem__Image} />
-          {showModal && 
-          <Modal onClose={this.toggleModal}>
-            <img src={data.largeImageURL} alt=""/>
-          </Modal>}
-        </li>
-
-        // <>  
-        // <li onClick={this.toggleModal} 
-        //     id={data.id} className={css.ImageGalleryItem} >
-        //   <img src={data.webformatURL} alt="" 
-        //     className={css.ImageGalleryItem__Image} />
-        // </li>
-        // {showModal && 
-        // <Modal onClose={this.toggleModal}>
-        //   <img src={data.largeImageURL} alt=""/>
-        // </Modal>}
-        // </>
-    )
-  }
+  return (
+    <li id={data.id} className={css.ImageGalleryItem} >
+      <img onClick={toggleModal} src={data.webformatURL} alt="" 
+        className={css.ImageGalleryItem__Image} />
+      {showModal && 
+      <Modal onClose={toggleModal}>
+        <img src={data.largeImageURL} alt=""/>
+      </Modal>}
+    </li>
+  )
 }
 
 ImageGalleryItem.propTypes = {

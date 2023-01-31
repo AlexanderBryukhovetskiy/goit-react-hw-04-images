@@ -29,10 +29,7 @@ const App = () => {
         setLoading(true);
 
         const response = await fetchPictures(searchName, page);
-            // console.log('response :', response);
-            
         setTotalImages(response.data.totalHits);
-            // console.log('totalImages :', totalImages);
       
         if ( response.data.totalHits === 0 ) {
           return toast(`There are no pictures by word ${searchName}`);
