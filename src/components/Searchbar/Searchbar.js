@@ -26,13 +26,13 @@ const Searchbar = ({onSubmit}) => {
 
   return (
     <header className={css.Searchbar}>
-      <form className={css.form} onSubmit={handleSubmit}>
-        <button type="submit" className={css.button}>
-          <span className={css.buttonLabel}>Search</span>
+      <form className={css.SearchForm} onSubmit={handleSubmit}>
+        <button type="submit" className={css.SearchFormButton}>
+          <span className={css.SearchFormButtonLabel}>Search</span>
         </button>
 
         <input
-          className={css.input}
+          className={css.SearchFormInput}
           type="text"
           name="searchName"
           value={searchName}
